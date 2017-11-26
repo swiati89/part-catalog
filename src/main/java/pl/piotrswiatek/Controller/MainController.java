@@ -16,12 +16,12 @@ public class MainController {
     @Autowired
     private PartService partService;
 
-    @RequestMapping(value = "/carmodel", method = RequestMethod.GET)
+    @RequestMapping(value = "/carmodelById", method = RequestMethod.GET)
     public CarModel getCarModel() {
         return carModelService.getCarModelById(-1L);
     }
 
-    @RequestMapping(value = "/part", method = RequestMethod.GET)
+    @RequestMapping(value = "/partById", method = RequestMethod.GET)
     public Part getPart() {
         return partService.getPartById(-1L);
     }
