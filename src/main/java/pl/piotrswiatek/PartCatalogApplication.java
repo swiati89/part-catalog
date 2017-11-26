@@ -1,11 +1,14 @@
 package pl.piotrswiatek;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.ejb.HibernateEntityManagerFactory;
+
+
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
+
+import javax.persistence.EntityManagerFactory;
+
 
 @SpringBootApplication
 public class PartCatalogApplication {
@@ -13,8 +16,12 @@ public class PartCatalogApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PartCatalogApplication.class, args);
 	}
-//	@Bean
-//	public SessionFactory sessionFactory(HibernateEntityManagerFactory hemf){
-//		return hemf.getSessionFactory();
-//	}
+
+    @Bean
+    public HibernateJpaSessionFactoryBean sessionFactory(EntityManagerFactory emf) {
+        HibernateJpaSessionFactoryBean fact = new HibernateJpaSessionFactoryBean();
+        fact.setEntityManagerFactory(emf);
+        return fact;
+    }
+
 }

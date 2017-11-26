@@ -1,10 +1,12 @@
 package pl.piotrswiatek.model.data;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Piotrek on 2017-07-01.
@@ -32,15 +34,21 @@ public class CarModel implements Serializable {
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "vehicle_body_type_id")
     private VehicleBodyType vehicleBodyType;
     @ManyToOne
     @JoinColumn(name = "vehicle_engine_id")
     private VehicleEngine vehicleEngine;
-    @ManyToOne
-    @JoinColumn(name = "part_id")
-    private Part part;
+    @JsonManagedReference
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "car_model_part",
+            joinColumns = {@JoinColumn(name = "car_model_id")},
+            inverseJoinColumns = {@JoinColumn(name = "part_id")}
+    )
+    private List<Part> parts;
 
 
 }

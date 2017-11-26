@@ -9,5 +9,6 @@ import pl.piotrswiatek.model.data.Part;
 public interface PartDao extends GenericDao<Part, Long> {
     void changePrice(Part part, Double price);
     void addCarModel(Part part, CarModel carModel);
+    void addPart(Part part);
 
 }

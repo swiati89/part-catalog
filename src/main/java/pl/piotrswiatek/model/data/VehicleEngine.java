@@ -1,5 +1,6 @@
 package pl.piotrswiatek.model.data;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,9 +23,11 @@ public class VehicleEngine implements Serializable {
     private String code;
     @Column(name = "capacity")
     private Integer capacity;
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "engine_type_id")
     private EngineType engineType;
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;

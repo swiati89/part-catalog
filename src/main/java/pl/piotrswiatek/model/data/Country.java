@@ -1,5 +1,6 @@
 package pl.piotrswiatek.model.data;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class Country implements Serializable {
     private String name;
     @Column(name = "country_code")
     private String countryCode;
-    @OneToMany(mappedBy = "country")
+    @JsonBackReference
+    @OneToMany(mappedBy = "country", fetch = FetchType.EAGER)
     private List<Manufacturer> manufacturers;
 }

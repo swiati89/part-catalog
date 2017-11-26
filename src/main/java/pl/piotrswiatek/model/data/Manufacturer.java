@@ -1,5 +1,7 @@
 package pl.piotrswiatek.model.data;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,9 +25,11 @@ public class Manufacturer implements Serializable {
     private String name;
     @Column(name = "address")
     private String address;
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "country_id")
     private Country country;
+    @JsonBackReference
     @OneToMany(mappedBy = "manufacturer")
     private List<VehicleEngine> vehicleEngines;
 }

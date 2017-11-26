@@ -1,5 +1,6 @@
 package pl.piotrswiatek.model.data;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class VehicleBodyType implements Serializable {
     private Long id;
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "vehicleBodyType")
+    @JsonBackReference
+    @OneToMany(mappedBy = "vehicleBodyType", fetch = FetchType.EAGER)
     private List<CarModel> carModels;
 }

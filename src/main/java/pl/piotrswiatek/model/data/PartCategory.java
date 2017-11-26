@@ -1,5 +1,6 @@
 package pl.piotrswiatek.model.data;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,7 +22,8 @@ public class PartCategory implements Serializable {
     private Long id;
     @Column(name = "category_name")
     private String categoryName;
-    @OneToMany(mappedBy = "category")
+    @JsonBackReference
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     private List<Part> parts;
 
 }

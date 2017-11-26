@@ -6,17 +6,20 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.piotrswiatek.dao.PartDao;
+import pl.piotrswiatek.dao.CarModelDao;
+import pl.piotrswiatek.dao.GenericDao;
 import pl.piotrswiatek.model.data.CarModel;
-import pl.piotrswiatek.model.data.Part;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 @Transactional
 @Repository
-public class PartDaoHibernate implements PartDao {
+public class CarModelDaoHibernate  implements CarModelDao {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -25,45 +28,34 @@ public class PartDaoHibernate implements PartDao {
         return sessionFactory;
     }
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
     @Override
-    public void changePrice(Part part, Double price) {
-
-    }
-
-    @Override
-    public void addCarModel(Part part, CarModel carModel) {
-
-    }
-
-    @Override
-    public void addPart(Part part) {
-
-    }
-
-    @Override
-    public List<Part> getAll() {
+    public List<CarModel> getAll() {
         return null;
     }
 
     @Override
-    public List<Part> getAllDistinct() {
+    public List<CarModel> getAllDistinct() {
         return null;
     }
 
     @Override
-    public List<Part> findAll(List<Criterion> criterions) {
+    public List<CarModel> findAll(List<Criterion> criterions) {
         return null;
     }
 
     @Override
-    public Part get(Long id) {
+    public CarModel get(Long id) {
         Session sess = getSessionFactory().getCurrentSession();
-        IdentifierLoadAccess byId = sess.byId(Part.class);
-        Part entity = (Part) byId.load(id);
+        IdentifierLoadAccess byId = sess.byId(CarModel.class);
+        CarModel entity = (CarModel) byId.load(id);
+
+//        if (entity == null) {
+//            log.warn("Uh oh, '" + this.persistentClass + "' object with id '"
+//                    + id + "' not found...");
+//
+//            //maly upgrade
+//            throw new NoSuchElementException(this.persistentClass.toString());
+//        }
 
         return entity;
     }
@@ -74,12 +66,12 @@ public class PartDaoHibernate implements PartDao {
     }
 
     @Override
-    public Part save(Part object) {
+    public CarModel save(CarModel object) {
         return null;
     }
 
     @Override
-    public void remove(Part object) {
+    public void remove(CarModel object) {
 
     }
 
@@ -89,7 +81,7 @@ public class PartDaoHibernate implements PartDao {
     }
 
     @Override
-    public List<Part> findByNamedQuery(String queryName, Map<String, Object> queryParams) {
+    public List<CarModel> findByNamedQuery(String queryName, Map<String, Object> queryParams) {
         return null;
     }
 

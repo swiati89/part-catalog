@@ -1,5 +1,6 @@
 package pl.piotrswiatek.model.data;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class PartPhoto implements Serializable {
     private String name;
     @Column(name = "description")
     private String description;
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "part_id")
     private Part part;

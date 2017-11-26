@@ -1,5 +1,6 @@
 package pl.piotrswiatek.model.data;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class EngineType implements Serializable {
     private String typeName;
     @Column(name = "fuel")
     private String fuel;
-    @OneToMany(mappedBy = "engineType")
+    @JsonBackReference
+    @OneToMany(mappedBy = "engineType", fetch = FetchType.EAGER)
     private List<VehicleEngine> vehicleEngines;
 }

@@ -1,7 +1,9 @@
 package pl.piotrswiatek.model.data;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
-
+import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,13 +24,16 @@ public class Part implements Serializable{
     private Long id;
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "part")
+    @JsonBackReference
+    @ManyToMany(mappedBy = "parts", fetch = FetchType.EAGER )
     private List<CarModel> carModels;
     @Column(name = "price")
     private Double price;
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "part_category_id")
     private PartCategory category;
+    @JsonBackReference
     @OneToMany(mappedBy = "part")
     private List<PartPhoto> partPhotos;
 
